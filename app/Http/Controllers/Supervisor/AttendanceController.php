@@ -71,7 +71,8 @@ class AttendanceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $attendance = Attendance::find($id);
+        return view('backend.supervisor.attendance.edit',compact('attendance'));
     }
 
     /**
@@ -105,6 +106,8 @@ class AttendanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $attendance = Attendance::find($id);
+        $attendance->delete();
+        return redirect()->back();
     }
 }

@@ -10,8 +10,8 @@
         <thead>
         <tr>
           <th>Sn</th>
-          <th>Name</th>
-          <th>Roll No</th>
+          <th>Subject Name</th>
+          <th>Image</th>
           <th>Status</th>
         </tr>
         </thead>
@@ -20,7 +20,7 @@
             <tr>
                 <td>{{$loop->index +1}}</td>
                 <td>{{$r->subject_name}}</td>
-                <td>{{$r->image}}</td>
+                <td><img src="{{asset($r->image)}}" alt="" height="100px" width="100px"></td>
                 <td><a href="/supervisor/assignment/{{$r->id}}/edit" class="badge bg-blue">Edit</a>
                     <form action="/supervisor/assignment/{{$r->id}}" method="POST">
                         {{method_field('DELETE')}}

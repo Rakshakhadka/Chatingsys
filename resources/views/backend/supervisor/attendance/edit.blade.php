@@ -14,6 +14,7 @@
             <!-- form start -->
             <form action="/supervisor/attendance/{{$attendance->id}}" method="POST">
                 @csrf
+                {{ method_field('PATCH') }}
               <div class="box-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>

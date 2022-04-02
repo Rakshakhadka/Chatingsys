@@ -73,7 +73,8 @@ class ClassroutineController extends Controller
      */
     public function edit($id)
     {
-        //
+        $classroutine = Classroutine::find($id);
+        return view('backend.supervisor.classroutine.edit',compact('classroutine'));
     }
 
     /**
@@ -109,6 +110,9 @@ class ClassroutineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $classroutine = Classroutine::find($id);
+        $classroutine->delete();
+        return redirect()->back();
+
     }
 }

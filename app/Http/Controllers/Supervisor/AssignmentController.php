@@ -75,7 +75,8 @@ class AssignmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $assignment = Assignment::find($id);
+        return view('backend.supervisor.assignment.edit',compact('assignment'));
     }
 
     /**
@@ -87,7 +88,22 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            "subject_name"=>"required",
+        ]);
+
+        $assignment= Assignment::find($id);
+        $assignment->subject_name=$request->subject_name;
+        if($request->hasFile('image')){
+            $file = $request->image;
+            $newName = time(). $file->getClientOriginalName();
+            $file->move('uploads/assignment/',$newName);
+            $assignment->image = 'uploads/assignment/'. $newName;
+
+        }
+        $assignment->save();
+        // $request->session()->flash('message','Record Saved');
+        return redirect()->back();
     }
 
     /**
@@ -98,6 +114,13 @@ class AssignmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $assignment = Assignment::find($id);
+       $assignment->delete();
+       if (file_exists($assignment->image)) {
+
+        @unlink($assignment->image);
+
+    }
+       return redirect()->back();
     }
 }
